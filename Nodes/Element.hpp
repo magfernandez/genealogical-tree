@@ -9,15 +9,70 @@ class Element
 {
 public:
 
-    Element( std::string aName, std::string aFatherName = "", std::string aMotherName = "" );
+    /**
+     * @brief Element Creates a element (node) based on its name and surname
+     * @param aName Person name
+     * @param aSurname Person surname
+     * @param aFatherName Father name, optional in constructor
+     * @param aFatherSurname Father surname, optional in constructor
+     * @param aMotherName Mother name, optional in constructor
+     * @param aMotherSurname Mother surname, optional in constructor
+     */
+    Element( std::string aName, std::string aSurname, std::string aFatherName = "",
+             std::string aFatherSurname = "", std::string aMotherName = "",
+             std::string aMotherSurname = "" );
 
+    /**
+     * @brief assignRelationship Checks the direct relationship (father, mother)
+     * between this element and another one, and sets the pointers in case it
+     * is neccessary
+     * @param aMember Pointer to member whose relationship will be checked
+     */
     void assignRelationship( Element * aMember );
+
+    /**
+     * @brief setFatherCredentials Sets the father name and surname for this element
+     * @param aName Father's name
+     * @param aSurname Father's surname
+     */
+    void setFatherCredentials( std::string aName, std::string aSurname );
+
+    /**
+     * @brief setMotherCredentials Sets the mother name and surname for this element
+     * @param aName Mother's name
+     * @param aSurname Mother's surname
+     */
+    void setMotherCredentials( std::string aName, std::string aSurname );
+
+    /**
+     * @brief getCompleteName Concatenates and returns the complete name for
+     * an element
+     * @return Complete name (name+surname) for this element
+     */
+    std::string getCompleteName();
+
+    /**
+     * @brief getFatherCompleteName Concatenates and returns the complete name
+     * for an element's father
+     * @return Complete name (name+surname) for this element's father
+     */
+    std::string getFatherCompleteName();
+
+    /**
+     * @brief getMotherCompleteName Concatenates and returns the complete name
+     * for an element's mother
+     * @return Complete name (name+surname) for this element's mother
+     */
+    std::string getMotherCompleteName();
 
 private:
 
     std::string theName;
+    std::string theSurname;
     std::string theFatherName;
+    std::string theFatherSurname;
     std::string theMotherName;
+    std::string theMotherSurname;
     Element * theNext;       // Pointer to next stored structure
     Element * thePrevious;   // Pointer to previous stored structure
     Element * theFather;     // Pointer to father
