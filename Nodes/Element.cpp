@@ -16,21 +16,20 @@ Element::Element(std::string aName, std::string aSurname, std::string aFatherNam
 
 void Element::assignRelationship( Element *aMember )
 {
-    // Relationship between names to compare and pointers to
-    // an assignable element for that role
-    std::map<std::string, Element *> theFamilyMap;
-    theFamilyMap[ this->getFatherCompleteName() ] = theFather;
-    theFamilyMap[ this->getMotherCompleteName() ] = theMother;
+    Element * aCurrentElement = aMember;
 
-    for (std::map<std::string, Element*>::iterator it=theFamilyMap.begin();
-         it!=theFamilyMap.end(); ++it)
+    while ( aCurrentElement != NULL )
     {
-        // if the element name is equal to the stored name, assign
-        // the current element to the pointer referenced in map
-        if ( it->first.compare( aMember->getCompleteName() ) == 0 )
+        if (aCurrentElement->getCompleteName().compare( this->getFatherCompleteName())==0)
         {
-            it->second = aMember;
+            this->theFather = aCurrentElement;
         }
+        if (aCurrentElement->getCompleteName().compare( this->getMotherCompleteName())==0)
+        {
+            this->theMother = aCurrentElement;
+        }
+
+        aCurrentElement = aCurrentElement->getNext();
     }
 }
 
@@ -59,4 +58,34 @@ std::string Element::getFatherCompleteName()
 std::string Element::getMotherCompleteName()
 {
     return ( this->theMotherName + std::string(" ") + this->theMotherSurname );
+}
+
+Element * Element::getNext()
+{
+    return this->theNext;
+}
+
+void Element::setNext( Element * aElement )
+{
+    this->theNext = aElement;
+}
+
+Element * Element::getPrevious()
+{
+    return this->thePrevious;
+}
+
+void Element::setPrevious( Element * aElement )
+{
+    this->thePrevious = aElement;
+}
+
+Element * Element::getFather()
+{
+    return this->theFather;
+}
+
+Element * Element::getMother()
+{
+    return this->theMother;
 }

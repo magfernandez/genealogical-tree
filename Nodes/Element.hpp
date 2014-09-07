@@ -65,6 +65,46 @@ public:
      */
     std::string getMotherCompleteName();
 
+    /**
+     * @brief getNext Returns the pointer to the next linked element
+     * @return Pointer to next element in list
+     */
+    Element * getNext();
+
+    /**
+     * @brief setNext Assigns an element as the next for this instance
+     * @param aElement Pointer to element to be set as next
+     */
+    void setNext( Element * aElement );
+
+    /**
+     * @brief getPrevious Returns the pointer to the previous linked
+     * element
+     * @return Pointer to previous element in list
+     */
+    Element * getPrevious();
+
+    /**
+     * @brief setPrevious Assigns an element as the previous for
+     * this instance
+     * @param aElement Pointer to element to be set as previous
+     */
+    void setPrevious( Element * aElement );
+
+    /**
+     * @brief getFather Returns the father element of this instance,
+     * if available
+     * @return Pointer to father in genealogic tree
+     */
+    Element * getFather();
+
+    /**
+     * @brief getMother Returns the mother elemnt of this instance,
+     * if available
+     * @return Pointer to mother in genealogic tree
+     */
+    Element * getMother();
+
 private:
 
     std::string theName;
