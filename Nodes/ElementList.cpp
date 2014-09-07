@@ -1,0 +1,97 @@
+#include "ElementList.hpp"
+
+ElementList::ElementList( )
+{
+    theFirst = NULL;
+    theLast = NULL;
+}
+
+ElementList::ElementList( Element *aStartElement )
+{
+    if ( aStartElement!=NULL )
+    {
+        // set first element
+        theFirst = aStartElement;
+
+        // Iterate over the list from the start until
+        // finding the last element
+        Element * aCurrentElement = aStartElement;
+        while( aCurrentElement != NULL)
+        {
+            theLast = aCurrentElement;
+            aCurrentElement = aCurrentElement->getNext();
+        }
+    }
+    else
+    {
+        // null list
+        theFirst = NULL;
+        theLast = NULL;
+    }
+
+}
+
+
+void ElementList::addElement( std::string aName, std::string aSurname,
+                              std::string aFatherName, std::string aFatherSurname,
+                              std::string aMotherName, std::string aMotherSurname )
+{
+    Element * aNewElement = new Element( aName, aSurname, aFatherName, aFatherSurname,
+                                         aMotherName, aMotherSurname );
+    if ( theFirst==NULL)
+    {
+        theFirst = aNewElement;
+    }
+    aNewElement->setPrevious( theLast );
+    if ( theLast!=NULL )
+    {
+        theLast->setNext( aNewElement );
+    }
+    aNewElement->setNext( NULL );
+    theLast = aNewElement;
+}
+
+int ElementList::countElements()
+{
+    int aElementNumber = 0;
+
+    Element * aCurrent = theFirst;
+
+    while( aCurrent!=NULL )
+    {
+        aCurrent = aCurrent->getNext();
+        aElementNumber++;
+    }
+
+    std::cout << "\nCount: " << aElementNumber << " elements in the list\n";
+
+    return aElementNumber;
+}
+
+int ElementList::assignRelationships()
+{
+    int aRelationshipsNr = 0;
+    Element * aCurrent = theFirst;
+
+    while ( aCurrent!=NULL )
+    {
+        aCurrent->assignRelationship( theFirst );
+        std::cout << "=======================\n"
+                  << "NAME: " << aCurrent->getCompleteName() << "\n";
+        if ( aCurrent->getFather()!=NULL )
+        {
+            std::cout << "FATHER: " << aCurrent->getFather()->getCompleteName() << "\n";
+            aRelationshipsNr++;
+        }
+        if ( aCurrent->getMother()!=NULL )
+        {
+            std::cout << "MOTHER: " << aCurrent->getMother()->getCompleteName() << "\n";
+            aRelationshipsNr++;
+        }
+        aCurrent = aCurrent->getNext();
+    }
+
+    std::cout << "\nRelationship: " << aRelationshipsNr << " relations found in list\n";
+
+    return aRelationshipsNr;
+}
