@@ -95,3 +95,24 @@ int ElementList::assignRelationships()
 
     return aRelationshipsNr;
 }
+
+Element * ElementList::getFirstElement()
+{
+    return this->theFirst;
+}
+
+void ElementList::deleteAllElements()
+{
+    Element * aCurrent = this->theFirst;
+    Element * aCurrentToDelete = this->theFirst;
+
+    while ( aCurrent!=NULL )
+    {
+        aCurrentToDelete = aCurrent;
+        aCurrent = aCurrent->getNext();
+        delete aCurrentToDelete;
+    }
+
+    theFirst = NULL;
+    theLast = NULL;
+}

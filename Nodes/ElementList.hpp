@@ -44,6 +44,17 @@ public:
      */
     int assignRelationships();
 
+    /**
+     * @brief getFirstElement Returns the first element on this list
+     * @return First element of the list
+     */
+    Element * getFirstElement();
+
+    /**
+     * @brief deleteAllElements Deletes all contained instances
+     */
+    void deleteAllElements();
+
 private:
     Element * theFirst;
     Element * theLast;
