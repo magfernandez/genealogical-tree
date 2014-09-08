@@ -16,12 +16,18 @@ TEMPLATE = app
 SOURCES += main.cpp\
         Visualizator/Visualizator.cpp \
     Nodes/Element.cpp \
-    Nodes/ElementList.cpp
+    Nodes/ElementList.cpp \
+    Visualizator/ElementWidget.cpp
 
 HEADERS  += Visualizator/Visualizator.hpp \
     Nodes/Element.hpp \
     Nodes/ElementList.hpp \
     Tests/Nodes/TestElement.hpp \
-    Tests/Nodes/TestElementList.hpp
+    Tests/Nodes/TestElementList.hpp \
+    Visualizator/ElementWidget.hpp
 
-FORMS    += Visualizator/Visualizator.ui
+FORMS    += Visualizator/Visualizator.ui \
+    Visualizator/ElementWidget.ui
+
+RESOURCES += \
+    Visualizator/Resources.qrc

@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/ElementWidget">
+        <file>Resources/female.png</file>
+        <file>Resources/male.png</file>
+        <file>Resources/square.png</file>
+        <file>Resources/squareRed.png</file>
+    </qresource>
+</RCC>
