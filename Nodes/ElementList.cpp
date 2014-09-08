@@ -32,11 +32,11 @@ ElementList::ElementList( Element *aStartElement )
 }
 
 
-void ElementList::addElement( std::string aName, std::string aSurname,
+void ElementList::addElement( std::string aName, std::string aSurname, Element::TGender aGender,
                               std::string aFatherName, std::string aFatherSurname,
                               std::string aMotherName, std::string aMotherSurname )
 {
-    Element * aNewElement = new Element( aName, aSurname, aFatherName, aFatherSurname,
+    Element * aNewElement = new Element( aName, aSurname, aGender, aFatherName, aFatherSurname,
                                          aMotherName, aMotherSurname );
     if ( theFirst==NULL)
     {

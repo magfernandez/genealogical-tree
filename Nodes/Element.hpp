@@ -9,6 +9,8 @@ class Element
 {
 public:
 
+    enum TGender { MALE, FEMALE };
+
     /**
      * @brief Element Creates a element (node) based on its name and surname
      * @param aName Person name
@@ -18,9 +20,9 @@ public:
      * @param aMotherName Mother name, optional in constructor
      * @param aMotherSurname Mother surname, optional in constructor
      */
-    Element( std::string aName, std::string aSurname, std::string aFatherName = "",
-             std::string aFatherSurname = "", std::string aMotherName = "",
-             std::string aMotherSurname = "" );
+    Element( std::string aName, std::string aSurname, TGender aGender, std::string aFatherName,
+             std::string aFatherSurname, std::string aMotherName,
+             std::string aMotherSurname );
 
     /**
      * @brief assignRelationship Checks the direct relationship (father, mother)
@@ -105,6 +107,12 @@ public:
      */
     Element * getMother();
 
+    /**
+     * @brief getGender Returns the gender for this instance
+     * @return Gender type set in this instance
+     */
+    Element::TGender getGender();
+
 private:
 
     std::string theName;
@@ -117,6 +125,7 @@ private:
     Element * thePrevious;   // Pointer to previous stored structure
     Element * theFather;     // Pointer to father
     Element * theMother;     // Pointer to mother
+    TGender theGender;
 };
 
 

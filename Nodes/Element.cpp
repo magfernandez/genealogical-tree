@@ -1,6 +1,6 @@
 #include "Element.hpp"
 
-Element::Element(std::string aName, std::string aSurname, std::string aFatherName, std::string aFatherSurname, std::string aMotherName , std::string aMotherSurname)
+Element::Element(std::string aName, std::string aSurname, TGender aGender, std::string aFatherName, std::string aFatherSurname, std::string aMotherName , std::string aMotherSurname)
 {
     theName = aName;
     theSurname = aSurname;
@@ -12,11 +12,18 @@ Element::Element(std::string aName, std::string aSurname, std::string aFatherNam
     thePrevious = NULL;
     theFather = NULL;
     theMother = NULL;
+    theGender = aGender;
 }
 
 void Element::assignRelationship( Element *aMember )
 {
     Element * aCurrentElement = aMember;
+
+    // Relationship between names to compare and pointers to
+    // an assignable element for that role
+    std::map<std::string, Element *> theFamilyMap;
+    theFamilyMap[ this->getFatherCompleteName() ] = this->theFather;
+    theFamilyMap[ this->getMotherCompleteName() ] = this->theMother;
 
     while ( aCurrentElement != NULL )
     {
@@ -88,4 +95,9 @@ Element * Element::getFather()
 Element * Element::getMother()
 {
     return this->theMother;
+}
+
+Element::TGender Element::getGender()
+{
+    return theGender;
 }

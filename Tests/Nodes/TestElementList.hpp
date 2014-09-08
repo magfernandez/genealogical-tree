@@ -40,14 +40,14 @@ public:
       aMotherName = "Scarlett";
       aMotherSurname = "O'Hara";
 
-      aTestElement = new Element( aName, aSurname,
+      aTestElement = new Element( aName, aSurname, Element::MALE,
                                             aFatherName, aFatherSurname,
                                             aMotherName, aMotherSurname );
 
-      aFatherTestElement = new Element( aFatherName, aFatherSurname,
+      aFatherTestElement = new Element( aFatherName, aFatherSurname, Element::MALE,
                                             "N/A", "N/A", "N/A", "N/A" );
 
-      aMotherTestElement = new Element( aMotherName, aMotherSurname,
+      aMotherTestElement = new Element( aMotherName, aMotherSurname, Element::FEMALE,
                                             "N/A", "N/A", "N/A", "N/A" );
 
       // Form a list starting on Father element
@@ -72,14 +72,14 @@ public:
   void testAddElement()
   {
       CPPUNIT_ASSERT( aListNullInit->countElements()==0);
-      aListNullInit->addElement( "A", "B", "C", "D", "E", "F" );
+      aListNullInit->addElement( "A", "B", Element::MALE,"C", "D", "E", "F" );
       CPPUNIT_ASSERT( aListNullInit->countElements()==1);
   }
 
   void testCountElements()
   {
       CPPUNIT_ASSERT( aListElementInit->countElements()==3);
-      aListElementInit->addElement( "A", "B", "C", "D", "E", "F" );
+      aListElementInit->addElement( "A", "B", Element::MALE, "C", "D", "E", "F" );
       CPPUNIT_ASSERT( aListElementInit->countElements()==4);
   }
 

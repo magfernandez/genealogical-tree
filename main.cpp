@@ -1,4 +1,5 @@
-
+#include "Visualizator/Visualizator.hpp"
+#include <QApplication>
 #include <iostream>
 
 #include "Nodes/ElementList.hpp"
@@ -21,14 +22,19 @@ int main(int argc, char *argv[])
     runner.run();
 
     ElementList aList;
-    aList.addElement( "John", "Doe", "Fox", "McCloud", "Jenna", "Jameson" );
-    aList.addElement( "Jimmy", "Doe", "John", "Doe", "Anna", "Frank" );
-    aList.addElement( "Anna", "Doe", "John", "Doe", "Anna", "Frank" );
-    aList.addElement( "Robert", "Gates", "Bill", "Gates", "Anna", "Doe" );
-
+    aList.addElement( "John", "Doe", Element::MALE, "Fox", "McCloud", "Jenna", "Jameson" );
+    aList.addElement( "Jimmy", "Doe", Element::MALE, "John", "Doe", "Anna", "Frank" );
+    aList.addElement( "Anna", "Doe", Element::FEMALE,"John", "Doe", "Anna", "Frank" );
+    aList.addElement( "Robert", "Gates", Element::MALE, "Bill", "Gates", "Anna", "Doe" );
     aList.assignRelationships();
     aList.countElements();
 
 
-    return 0;
+    QApplication a(argc, argv);
+
+
+    Visualizator w( &aList );
+    w.show();
+
+    return a.exec();
 }

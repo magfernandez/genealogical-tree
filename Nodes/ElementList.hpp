@@ -27,7 +27,7 @@ public:
      * @param aMotherName Mother name for the new element node
      * @param aMotherSurname Mother surname for the new element node
      */
-    void addElement( std::string aName, std::string aSurname,
+    void addElement(std::string aName, std::string aSurname, Element::TGender aGender,
                      std::string aFatherName, std::string aFatherSurname,
                      std::string aMotherName, std::string aMotherSurname );
 

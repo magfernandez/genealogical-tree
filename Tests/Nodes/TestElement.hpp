@@ -13,6 +13,7 @@ class TestElement : public CppUnit::TestFixture  {
     CPPUNIT_TEST( testGetCompleteName );
     CPPUNIT_TEST( testNextAll );
     CPPUNIT_TEST( testPreviousAll );
+    CPPUNIT_TEST( testGender );
     CPPUNIT_TEST_SUITE_END();
 
 private:
@@ -38,14 +39,14 @@ public:
       aMotherName = "Scarlett";
       aMotherSurname = "O'Hara";
 
-      aTestElement = new Element( aName, aSurname,
-                                            aFatherName, aFatherSurname,
-                                            aMotherName, aMotherSurname );
+      aTestElement = new Element( aName, aSurname, Element::MALE,
+                                  aFatherName, aFatherSurname,
+                                  aMotherName, aMotherSurname );
 
-      aFatherTestElement = new Element( aFatherName, aFatherSurname,
+      aFatherTestElement = new Element( aFatherName, aFatherSurname, Element::MALE,
                                             "N/A", "N/A", "N/A", "N/A" );
 
-      aMotherTestElement = new Element( aMotherName, aMotherSurname,
+      aMotherTestElement = new Element( aMotherName, aMotherSurname, Element::FEMALE,
                                             "N/A", "N/A", "N/A", "N/A" );
 
       // Form a list starting on Father element
@@ -98,7 +99,7 @@ public:
   void testNextAll()
   {
       // Insert a new element at the end of the list
-      Element * aNewElement = new Element( "A" , "B", "C", "D", "E", "F" );
+      Element * aNewElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F" );
       aTestElement->setNext( aNewElement );
       CPPUNIT_ASSERT( aTestElement->getNext()==aNewElement );
       aTestElement->setNext( NULL );
@@ -108,11 +109,23 @@ public:
   void testPreviousAll()
   {
       // Insert a new element at the start of the list
-      Element * aNewElement = new Element( "A" , "B", "C", "D", "E", "F" );
+      Element * aNewElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F" );
       aFatherTestElement->setPrevious( aNewElement );
       CPPUNIT_ASSERT( aFatherTestElement->getPrevious()==aNewElement );
       aFatherTestElement->setPrevious( NULL );
       delete aNewElement;
+  }
+
+  void testGender()
+  {
+      // Create a male element
+      Element * aMaleElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F" );
+      Element * aFemaleElement = new Element( "G" , "H", Element::FEMALE, "I", "J", "K", "L" );
+      CPPUNIT_ASSERT( aMaleElement->getGender()==Element::MALE );
+      CPPUNIT_ASSERT( aFemaleElement->getGender()==Element::FEMALE );
+
+      delete aMaleElement;
+      delete aFemaleElement;
   }
 
 };
