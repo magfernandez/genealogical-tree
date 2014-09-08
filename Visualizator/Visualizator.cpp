@@ -22,17 +22,40 @@ Visualizator::~Visualizator()
 void Visualizator::drawElementList( ElementList * aList, int startPositionX, int startPositionY )
 {
     Element * aCurrentElement = aList->getFirstElement();
-    int positionX = 0;
-    int positionY = 0;
+    int positionX = START_X;
+    int positionY = START_Y;
 
 
     while ( aCurrentElement!=NULL )
     {
         drawSingleElement( aCurrentElement, positionX, positionY );
         aCurrentElement = aCurrentElement->getNext();
-        positionX = positionX + 50;
-        positionY = positionY + 50;
+        positionX = positionX + OFFSET_X_NONRELATED;
     }
+
+    for (std::map<Element*, ElementWidget*>::iterator it=theWidgetMap.begin();
+                 it!=theWidgetMap.end(); ++it)
+    {
+        for (std::map<Element*, ElementWidget*>::iterator it_int=theWidgetMap.begin();
+                     it_int!=theWidgetMap.end(); ++it_int)
+        {
+            if (it->first->getFather()==it_int->first)
+            {
+                it->second->move(it_int->second->x()+(it_int->second->getSonNumber()*OFFSET_X), it_int->second->y()+OFFSET_Y);
+                it_int->second->increaseSons();
+                it_int->second->move( it_int->second->x() + ((it_int->second->getSonNumber()-1)*(OFFSET_X/2)), it_int->second->y() );
+            }
+
+            if (it->first->getMother()==it_int->first)
+            {
+                it->second->move(it_int->second->x()+(it_int->second->getSonNumber()*OFFSET_X), it_int->second->y()+OFFSET_Y);
+                it_int->second->increaseSons();
+                it_int->second->move( it_int->second->x() + ((it_int->second->getSonNumber()-1)*(OFFSET_X/2)), it_int->second->y() );
+            }
+        }
+    }
+
+
 }
 
 

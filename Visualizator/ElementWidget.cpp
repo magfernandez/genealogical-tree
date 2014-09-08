@@ -6,6 +6,7 @@ ElementWidget::ElementWidget(QWidget *parent) :
     ui(new Ui::ElementWidget)
 {
     ui->setupUi(this);
+    numberOfSons = 0;
 }
 
 ElementWidget::~ElementWidget()
@@ -45,4 +46,14 @@ void ElementWidget::setFemale( bool isFemale )
     {
         ui->theIcon->setPixmap( QPixmap( ":/ElementWidget/Resources/male.png" ) );
     }
+}
+
+int ElementWidget::getSonNumber()
+{
+    return numberOfSons;
+}
+
+void ElementWidget::increaseSons()
+{
+    numberOfSons++;
 }

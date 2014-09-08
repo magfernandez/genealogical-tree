@@ -25,10 +25,16 @@ public:
 
     void addParentConnection( ElementWidget * aWidget );
 
+    int getSonNumber();
+
+    void increaseSons();
+
 private:
     Ui::ElementWidget *ui;
 
     QList<ElementWidget*> theParentConnectionList;
+
+    int numberOfSons;
 };
 
 #endif // ELEMENTWIDGET_HPP

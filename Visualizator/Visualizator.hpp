@@ -6,6 +6,13 @@
 #include "Visualizator/ElementWidget.hpp"
 #include <QPainter>
 
+#define START_X  100
+#define START_Y   25
+#define OFFSET_X_NONRELATED 200
+#define OFFSET_X 150
+#define OFFSET_Y 110
+
+
 namespace Ui {
 class Visualizator;
 }
