@@ -19,6 +19,11 @@ void ElementWidget::setName( std::string aName )
     ui->theName->setText( QString::fromStdString( aName ) );
 }
 
+void ElementWidget::setBirthDate( std::string aBirthDate )
+{
+    ui->theBirthdate->setText( QString::fromStdString( aBirthDate ));
+}
+
 void ElementWidget::setSelected( bool isSelected )
 {
      if (isSelected)

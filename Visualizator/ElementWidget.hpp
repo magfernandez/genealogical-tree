@@ -17,6 +17,7 @@ public:
 
     void setName(std::string aName);
 
+    void setBirthDate( std::string aBirthDate );
 
     void setSelected( bool isSeleted );
 
