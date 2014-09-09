@@ -19,7 +19,7 @@ Visualizator::~Visualizator()
     delete ui;
 }
 
-void Visualizator::drawElementList( ElementList * aList, int startPositionX, int startPositionY )
+void Visualizator::drawElementList( ElementList * aList )
 {
     Element * aCurrentElement = aList->getFirstElement();
     int positionX = START_X;

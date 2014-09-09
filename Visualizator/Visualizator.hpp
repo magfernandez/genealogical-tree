@@ -36,10 +36,8 @@ private:
      * @brief drawElementList Draws icons on visualizator window starting
      * from the specified position
      * @param aList List to be drawn
-     * @param startPositionX initial x position (pixels)
-     * @param startPositionY initial y position (pixels)
      */
-    void drawElementList( ElementList * aList, int startPositionX = 0, int startPositionY = 0 );
+    void drawElementList(ElementList * aList);
 
     /**
      * @brief drawSingleElement Draws a single element and adds it
