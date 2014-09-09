@@ -2,6 +2,7 @@
 #define __TESTELEMENT_HPP
 
 #include "Nodes/Element.hpp"
+#include <cstdlib>
 #include <cppunit/extensions/HelperMacros.h>
 
 class TestElement : public CppUnit::TestFixture  {
@@ -14,6 +15,7 @@ class TestElement : public CppUnit::TestFixture  {
     CPPUNIT_TEST( testNextAll );
     CPPUNIT_TEST( testPreviousAll );
     CPPUNIT_TEST( testGender );
+    CPPUNIT_TEST( testBirthdate );
     CPPUNIT_TEST_SUITE_END();
 
 private:
@@ -28,6 +30,9 @@ private:
     std::string aFatherSurname;
     std::string aMotherName;
     std::string aMotherSurname;
+    int aYear;
+    int aMonth;
+    int aDay;
 
 public:
   void setUp()
@@ -38,10 +43,13 @@ public:
       aFatherSurname = "Doe";
       aMotherName = "Scarlett";
       aMotherSurname = "O'Hara";
+      aYear = 1985;
+      aMonth = 8;
+      aDay = 15;
 
       aTestElement = new Element( aName, aSurname, Element::MALE,
                                   aFatherName, aFatherSurname,
-                                  aMotherName, aMotherSurname, 1985, 8, 15 );
+                                  aMotherName, aMotherSurname, aYear, aMonth, aDay );
 
       aFatherTestElement = new Element( aFatherName, aFatherSurname, Element::MALE,
                                             "N/A", "N/A", "N/A", "N/A", 1944, 4, 4 );
@@ -126,6 +134,36 @@ public:
 
       delete aMaleElement;
       delete aFemaleElement;
+  }
+
+  void testBirthdate()
+  {
+      CPPUNIT_ASSERT( aTestElement->getBirthDate().length() == 10 );
+      Element * aElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F", 1995, 1, 1 );
+      aElement->setBirthDate( 2002, 12, 25 );
+      CPPUNIT_ASSERT( aElement->getBirthDate().compare( "2002-12-25" )==0);
+
+      for (int i=0; i<50000; i++)
+      {
+          int aRandomYear  = (rand() % 50000)-25000;
+          int aRandomMonth = (rand() % 100)-50;
+          int aRandomDay   = (rand() % 200)-100;
+          bool aResult = aElement->setBirthDate( aRandomYear, aRandomMonth, aRandomDay );
+
+          bool aExpectedResult;
+          if (( aRandomYear<0 ) ||( aRandomYear>9999 )||
+              ( aRandomMonth<1 )||( aRandomMonth>12 ) ||
+              ( aRandomDay<1 )  ||( aRandomDay>31 ))
+          {
+              aExpectedResult = false;
+          }
+          else
+          {
+              aExpectedResult = true;
+          }
+          CPPUNIT_ASSERT( aResult==aExpectedResult );
+      }
+
   }
 
 };
