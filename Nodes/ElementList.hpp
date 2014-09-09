@@ -29,7 +29,7 @@ public:
      */
     void addElement(std::string aName, std::string aSurname, Element::TGender aGender,
                      std::string aFatherName, std::string aFatherSurname,
-                     std::string aMotherName, std::string aMotherSurname , int aBirthYear, int aBirthMonth, int aBirthDay);
+                     std::string aMotherName, std::string aMotherSurname , int aBirthYear, int aBirthMonth, int aBirthDay, std::string aBirthLocation);
 
     /**
      * @brief countElements Counts the number of elements in the list

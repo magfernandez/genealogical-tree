@@ -35,10 +35,10 @@ ElementList::ElementList( Element *aStartElement )
 void ElementList::addElement( std::string aName, std::string aSurname, Element::TGender aGender,
                               std::string aFatherName, std::string aFatherSurname,
                               std::string aMotherName, std::string aMotherSurname, int aBirthYear,
-                              int aBirthMonth, int aBirthDay )
+                              int aBirthMonth, int aBirthDay, std::string aBirthLocation )
 {
     Element * aNewElement = new Element( aName, aSurname, aGender, aFatherName, aFatherSurname,
-                                         aMotherName, aMotherSurname, aBirthYear, aBirthMonth, aBirthDay );
+                                         aMotherName, aMotherSurname, aBirthYear, aBirthMonth, aBirthDay, aBirthLocation );
     if ( theFirst==NULL)
     {
         theFirst = aNewElement;
@@ -63,8 +63,6 @@ int ElementList::countElements()
         aCurrent = aCurrent->getNext();
         aElementNumber++;
     }
-
-    std::cout << "\nCount: " << aElementNumber << " elements in the list\n";
 
     return aElementNumber;
 }
