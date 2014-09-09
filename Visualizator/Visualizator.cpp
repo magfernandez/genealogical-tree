@@ -66,6 +66,7 @@ void Visualizator::drawSingleElement( Element * aElement, int posX, int posY )
     theElements.append( aWidget );
     theWidgetMap[ aElement ] = aWidget;
     aWidget->setName( aElement->getCompleteName() );
+    aWidget->setBirthDate( aElement->getBirthDate() );
     if ( aElement->getGender()==Element::FEMALE)
         aWidget->setFemale( true );
     else
