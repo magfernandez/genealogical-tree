@@ -29,7 +29,8 @@ public:
      */
     Element(std::string aName, std::string aSurname, TGender aGender, std::string aFatherName,
              std::string aFatherSurname, std::string aMotherName,
-             std::string aMotherSurname, int aBirthYear, int aBirthMonth, int aBirthDay );
+             std::string aMotherSurname, int aBirthYear, int aBirthMonth, int aBirthDay,
+             std::string aBirthLocation );
 
     /**
      * @brief assignRelationship Checks the direct relationship (father, mother)
@@ -135,6 +136,12 @@ public:
      */
     bool setBirthDate( int aYear, int aMonth, int aDay );
 
+    /**
+     * @brief getBirthLocation Gets the birth location for this element
+     * @return stored birth location string
+     */
+    std::string getBirthLocation();
+
 private:
 
     std::string theName;
@@ -149,6 +156,7 @@ private:
     Element * theMother;     // Pointer to mother
     TGender theGender;
     TDate theBirthDate;
+    std::string theBirthLocation;
 };
 
 

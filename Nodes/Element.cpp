@@ -1,7 +1,7 @@
 #include "Element.hpp"
 
 Element::Element(std::string aName, std::string aSurname, TGender aGender, std::string aFatherName, std::string aFatherSurname,
-                 std::string aMotherName , std::string aMotherSurname, int aBirthYear, int aBirthMonth, int aBirthDay )
+                 std::string aMotherName , std::string aMotherSurname, int aBirthYear, int aBirthMonth, int aBirthDay , std::string aBirthLocation)
 {
     theName = aName;
     theSurname = aSurname;
@@ -17,6 +17,7 @@ Element::Element(std::string aName, std::string aSurname, TGender aGender, std::
     theBirthDate.year = aBirthYear;
     theBirthDate.month = aBirthMonth;
     theBirthDate.day = aBirthDay;
+    theBirthLocation = aBirthLocation;
 }
 
 void Element::assignRelationship( Element *aMember )
@@ -127,4 +128,9 @@ bool Element::setBirthDate( int aYear, int aMonth, int aDay )
         return false;
     }
 
+}
+
+std::string Element::getBirthLocation()
+{
+    return theBirthLocation;
 }
