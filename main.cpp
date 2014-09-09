@@ -26,6 +26,8 @@ int main(int argc, char *argv[])
     aList.addElement( "Jimmy", "Doe", Element::MALE, "John", "Doe", "Anna", "Frank", 1976, 6, 22, "Paris" );
     aList.addElement( "Anna", "Doe", Element::FEMALE,"John", "Doe", "Anna", "Frank", 1979, 10, 14, "Moscow" );
     aList.addElement( "Robert", "Gates", Element::MALE, "Bill", "Gates", "Anna", "Doe", 2004, 3, 27, "Pekin" );
+    aList.addElement( "Miguel", "Gutierrez", Element::MALE, "Jose Luis", "Gutierrez", "Maria Asuncion", "Fernandez", 1985, 8, 15, "Ponferrada" );
+    aList.addElement( "Ernie", "Gates", Element::MALE, "Bill", "Gates", "Anna", "Doe", 1987, 12, 12, "Valdepeñas" );
     aList.assignRelationships();
     aList.countElements();
 
