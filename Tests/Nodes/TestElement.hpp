@@ -16,6 +16,7 @@ class TestElement : public CppUnit::TestFixture  {
     CPPUNIT_TEST( testPreviousAll );
     CPPUNIT_TEST( testGender );
     CPPUNIT_TEST( testBirthdate );
+    CPPUNIT_TEST( testBirthLocation );
     CPPUNIT_TEST_SUITE_END();
 
 private:
@@ -33,6 +34,9 @@ private:
     int aYear;
     int aMonth;
     int aDay;
+    std::string aBirthLocation_1;
+    std::string aBirthLocation_2;
+    std::string aBirthLocation_3;
 
 public:
   void setUp()
@@ -46,16 +50,20 @@ public:
       aYear = 1985;
       aMonth = 8;
       aDay = 15;
+      aBirthLocation_1 = "Ponferrada";
+      aBirthLocation_2 = "Stevenage";
+      aBirthLocation_3 = "Vilanuide";
 
       aTestElement = new Element( aName, aSurname, Element::MALE,
                                   aFatherName, aFatherSurname,
-                                  aMotherName, aMotherSurname, aYear, aMonth, aDay );
+                                  aMotherName, aMotherSurname, aYear, aMonth, aDay,
+                                  aBirthLocation_1 );
 
       aFatherTestElement = new Element( aFatherName, aFatherSurname, Element::MALE,
-                                            "N/A", "N/A", "N/A", "N/A", 1944, 4, 4 );
+                                            "N/A", "N/A", "N/A", "N/A", 1944, 4, 4, aBirthLocation_2 );
 
       aMotherTestElement = new Element( aMotherName, aMotherSurname, Element::FEMALE,
-                                            "N/A", "N/A", "N/A", "N/A", 1956, 7, 12 );
+                                            "N/A", "N/A", "N/A", "N/A", 1956, 7, 12, aBirthLocation_3 );
 
       // Form a list starting on Father element
       aFatherTestElement->setNext( aMotherTestElement );
@@ -107,7 +115,7 @@ public:
   void testNextAll()
   {
       // Insert a new element at the end of the list
-      Element * aNewElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F", 1995, 1, 1 );
+      Element * aNewElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F", 1995, 1, 1, aBirthLocation_1 );
       aTestElement->setNext( aNewElement );
       CPPUNIT_ASSERT( aTestElement->getNext()==aNewElement );
       aTestElement->setNext( NULL );
@@ -117,7 +125,7 @@ public:
   void testPreviousAll()
   {
       // Insert a new element at the start of the list
-      Element * aNewElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F", 1995, 1, 1 );
+      Element * aNewElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F", 1995, 1, 1, aBirthLocation_1 );
       aFatherTestElement->setPrevious( aNewElement );
       CPPUNIT_ASSERT( aFatherTestElement->getPrevious()==aNewElement );
       aFatherTestElement->setPrevious( NULL );
@@ -127,8 +135,8 @@ public:
   void testGender()
   {
       // Create a male element
-      Element * aMaleElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F", 1995, 1, 1 );
-      Element * aFemaleElement = new Element( "G" , "H", Element::FEMALE, "I", "J", "K", "L", 1995, 1, 1 );
+      Element * aMaleElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F", 1995, 1, 1, aBirthLocation_1 );
+      Element * aFemaleElement = new Element( "G" , "H", Element::FEMALE, "I", "J", "K", "L", 1995, 1, 1, aBirthLocation_1 );
       CPPUNIT_ASSERT( aMaleElement->getGender()==Element::MALE );
       CPPUNIT_ASSERT( aFemaleElement->getGender()==Element::FEMALE );
 
@@ -139,7 +147,7 @@ public:
   void testBirthdate()
   {
       CPPUNIT_ASSERT( aTestElement->getBirthDate().length() == 10 );
-      Element * aElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F", 1995, 1, 1 );
+      Element * aElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F", 1995, 1, 1, aBirthLocation_1 );
       aElement->setBirthDate( 2002, 12, 25 );
       CPPUNIT_ASSERT( aElement->getBirthDate().compare( "2002-12-25" )==0);
 
@@ -164,6 +172,13 @@ public:
           CPPUNIT_ASSERT( aResult==aExpectedResult );
       }
 
+  }
+
+  void testBirthLocation()
+  {
+      CPPUNIT_ASSERT( aTestElement->getBirthLocation().compare( aBirthLocation_1 )==0);
+      CPPUNIT_ASSERT( aFatherTestElement->getBirthLocation().compare( aBirthLocation_2 )==0);
+      CPPUNIT_ASSERT( aMotherTestElement->getBirthLocation().compare( aBirthLocation_3 )==0);
   }
 
 };
