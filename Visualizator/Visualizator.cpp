@@ -33,11 +33,11 @@ void Visualizator::drawElementList( ElementList * aList )
         positionX = positionX + OFFSET_X_NONRELATED;
     }
 
-    for (std::map<Element*, ElementWidget*>::iterator it=theWidgetMap.begin();
-                 it!=theWidgetMap.end(); ++it)
+    for (std::map<Element*, ElementWidget*>::iterator it_int=theWidgetMap.begin();
+                 it_int!=theWidgetMap.end(); ++it_int)
     {
-        for (std::map<Element*, ElementWidget*>::iterator it_int=theWidgetMap.begin();
-                     it_int!=theWidgetMap.end(); ++it_int)
+        for (std::map<Element*, ElementWidget*>::iterator it=theWidgetMap.begin();
+                     it!=theWidgetMap.end(); ++it)
         {
             if (it->first->getFather()==it_int->first)
             {
