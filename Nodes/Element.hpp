@@ -4,10 +4,17 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <stdio.h>
 
 class Element
 {
 public:
+
+    typedef struct {
+        int year;
+        int month;
+        int day;
+    }TDate;
 
     enum TGender { MALE, FEMALE };
 
@@ -20,9 +27,9 @@ public:
      * @param aMotherName Mother name, optional in constructor
      * @param aMotherSurname Mother surname, optional in constructor
      */
-    Element( std::string aName, std::string aSurname, TGender aGender, std::string aFatherName,
+    Element(std::string aName, std::string aSurname, TGender aGender, std::string aFatherName,
              std::string aFatherSurname, std::string aMotherName,
-             std::string aMotherSurname );
+             std::string aMotherSurname, int aBirthYear, int aBirthMonth, int aBirthDay );
 
     /**
      * @brief assignRelationship Checks the direct relationship (father, mother)
@@ -113,6 +120,21 @@ public:
      */
     Element::TGender getGender();
 
+    /**
+     * @brief getBirthDate Returns the birth date of this element
+     * @return string containing the birth date in format YYYY-MM-DD
+     */
+    std::string getBirthDate();
+
+    /**
+     * @brief setBirthDate Sets the birth date for this element
+     * @param aYear Birth year [0..9999]
+     * @param aMonth Birth month [1..12]
+     * @param aDay Birth day [1..31]
+     * @return true if the date is correct. false otherwise
+     */
+    bool setBirthDate( int aYear, int aMonth, int aDay );
+
 private:
 
     std::string theName;
@@ -126,6 +148,7 @@ private:
     Element * theFather;     // Pointer to father
     Element * theMother;     // Pointer to mother
     TGender theGender;
+    TDate theBirthDate;
 };
 
 

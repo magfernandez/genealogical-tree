@@ -1,6 +1,7 @@
 #include "Element.hpp"
 
-Element::Element(std::string aName, std::string aSurname, TGender aGender, std::string aFatherName, std::string aFatherSurname, std::string aMotherName , std::string aMotherSurname)
+Element::Element(std::string aName, std::string aSurname, TGender aGender, std::string aFatherName, std::string aFatherSurname,
+                 std::string aMotherName , std::string aMotherSurname, int aBirthYear, int aBirthMonth, int aBirthDay )
 {
     theName = aName;
     theSurname = aSurname;
@@ -13,6 +14,9 @@ Element::Element(std::string aName, std::string aSurname, TGender aGender, std::
     theFather = NULL;
     theMother = NULL;
     theGender = aGender;
+    theBirthDate.year = aBirthYear;
+    theBirthDate.month = aBirthMonth;
+    theBirthDate.day = aBirthDay;
 }
 
 void Element::assignRelationship( Element *aMember )
@@ -100,4 +104,27 @@ Element * Element::getMother()
 Element::TGender Element::getGender()
 {
     return theGender;
+}
+
+std::string Element::getBirthDate()
+{
+    char buffer [11];
+    sprintf( buffer, "%04i-%02i%-02i", this->theBirthDate.year, this->theBirthDate.month, this->theBirthDate.day );
+    return std::string( buffer );
+}
+
+bool Element::setBirthDate( int aYear, int aMonth, int aDay )
+{
+    if (( aYear>=0 )&&( aYear<10000 )&&( aMonth>0 )&&( aMonth<13 )&&( aDay>0 )&&( aDay<32 ))
+    {
+        this->theBirthDate.year  = aYear;
+        this->theBirthDate.month = aMonth;
+        this->theBirthDate.day   = aDay;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
 }

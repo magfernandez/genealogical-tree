@@ -41,13 +41,13 @@ public:
 
       aTestElement = new Element( aName, aSurname, Element::MALE,
                                   aFatherName, aFatherSurname,
-                                  aMotherName, aMotherSurname );
+                                  aMotherName, aMotherSurname, 1985, 8, 15 );
 
       aFatherTestElement = new Element( aFatherName, aFatherSurname, Element::MALE,
-                                            "N/A", "N/A", "N/A", "N/A" );
+                                            "N/A", "N/A", "N/A", "N/A", 1944, 4, 4 );
 
       aMotherTestElement = new Element( aMotherName, aMotherSurname, Element::FEMALE,
-                                            "N/A", "N/A", "N/A", "N/A" );
+                                            "N/A", "N/A", "N/A", "N/A", 1956, 7, 12 );
 
       // Form a list starting on Father element
       aFatherTestElement->setNext( aMotherTestElement );
@@ -99,7 +99,7 @@ public:
   void testNextAll()
   {
       // Insert a new element at the end of the list
-      Element * aNewElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F" );
+      Element * aNewElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F", 1995, 1, 1 );
       aTestElement->setNext( aNewElement );
       CPPUNIT_ASSERT( aTestElement->getNext()==aNewElement );
       aTestElement->setNext( NULL );
@@ -109,7 +109,7 @@ public:
   void testPreviousAll()
   {
       // Insert a new element at the start of the list
-      Element * aNewElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F" );
+      Element * aNewElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F", 1995, 1, 1 );
       aFatherTestElement->setPrevious( aNewElement );
       CPPUNIT_ASSERT( aFatherTestElement->getPrevious()==aNewElement );
       aFatherTestElement->setPrevious( NULL );
@@ -119,8 +119,8 @@ public:
   void testGender()
   {
       // Create a male element
-      Element * aMaleElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F" );
-      Element * aFemaleElement = new Element( "G" , "H", Element::FEMALE, "I", "J", "K", "L" );
+      Element * aMaleElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F", 1995, 1, 1 );
+      Element * aFemaleElement = new Element( "G" , "H", Element::FEMALE, "I", "J", "K", "L", 1995, 1, 1 );
       CPPUNIT_ASSERT( aMaleElement->getGender()==Element::MALE );
       CPPUNIT_ASSERT( aFemaleElement->getGender()==Element::FEMALE );
 

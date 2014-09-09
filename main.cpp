@@ -22,10 +22,10 @@ int main(int argc, char *argv[])
     runner.run();
 
     ElementList aList;
-    aList.addElement( "John", "Doe", Element::MALE, "Fox", "McCloud", "Jenna", "Jameson" );
-    aList.addElement( "Jimmy", "Doe", Element::MALE, "John", "Doe", "Anna", "Frank" );
-    aList.addElement( "Anna", "Doe", Element::FEMALE,"John", "Doe", "Anna", "Frank" );
-    aList.addElement( "Robert", "Gates", Element::MALE, "Bill", "Gates", "Anna", "Doe" );
+    aList.addElement( "John", "Doe", Element::MALE, "Fox", "McCloud", "Jenna", "Jameson", 1954, 11, 7 );
+    aList.addElement( "Jimmy", "Doe", Element::MALE, "John", "Doe", "Anna", "Frank", 1976, 6, 22 );
+    aList.addElement( "Anna", "Doe", Element::FEMALE,"John", "Doe", "Anna", "Frank", 1979, 10, 14 );
+    aList.addElement( "Robert", "Gates", Element::MALE, "Bill", "Gates", "Anna", "Doe", 2004, 3, 27 );
     aList.assignRelationships();
     aList.countElements();
 
