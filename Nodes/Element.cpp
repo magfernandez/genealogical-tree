@@ -109,7 +109,7 @@ Element::TGender Element::getGender()
 std::string Element::getBirthDate()
 {
     char buffer [11];
-    sprintf( buffer, "%04i-%02i%-02i", this->theBirthDate.year, this->theBirthDate.month, this->theBirthDate.day );
+    sprintf( buffer, "%04i-%02i-%02i", this->theBirthDate.year, this->theBirthDate.month, this->theBirthDate.day );
     return std::string( buffer );
 }
 
