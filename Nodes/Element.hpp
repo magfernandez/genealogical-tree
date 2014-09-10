@@ -62,6 +62,12 @@ public:
     std::string getCompleteName();
 
     /**
+     * @brief getName Returns the first name for this element
+     * @return First name for this element
+     */
+    std::string getName();
+
+    /**
      * @brief getFatherCompleteName Concatenates and returns the complete name
      * for an element's father
      * @return Complete name (name+surname) for this element's father

@@ -62,6 +62,11 @@ std::string Element::getCompleteName()
     return ( this->theName + std::string(" ") + this->theSurname );
 }
 
+std::string Element::getName()
+{
+    return theName;
+}
+
 std::string Element::getFatherCompleteName()
 {
     return ( this->theFatherName + std::string(" ") + this->theFatherSurname );
