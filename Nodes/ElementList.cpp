@@ -31,6 +31,50 @@ ElementList::ElementList( Element *aStartElement )
 
 }
 
+std::list<Element*> ElementList::searchDescendantsByName( std::string aNameAscendant, std::string aNameDescendant )
+{
+    std::list<Element*> aElementList = std::list<Element*>();
+    std::list<Element*>::iterator it = aElementList.begin();
+
+    Element * aCurrent = theFirst;
+    Element * aFirstToLook = NULL;
+
+    while( aCurrent!=NULL )
+    {
+        if ( aCurrent->getName().compare( aNameAscendant )==0 )
+        {
+            aFirstToLook = aCurrent;
+            aCurrent = NULL;
+        }
+        else
+        {
+            aCurrent = aCurrent->getNext();
+        }
+    }
+
+    if ( aFirstToLook==NULL )
+    {
+        return std::list<Element*>();
+    }
+    else
+    {
+        aCurrent = aFirstToLook;
+
+        while( aCurrent!=NULL )
+        {
+            if ( aCurrent->getName().compare( aNameDescendant )==0)
+            {
+                // add to list
+                aElementList.insert( it, aCurrent );
+                ++it;
+            }
+            aCurrent=aCurrent->getNext();
+        }
+    }
+
+    return aElementList;
+}
+
 
 void ElementList::addElement( std::string aName, std::string aSurname, Element::TGender aGender,
                               std::string aFatherName, std::string aFatherSurname,

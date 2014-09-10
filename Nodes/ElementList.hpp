@@ -2,6 +2,7 @@
 #define __ELEMENTLIST_HPP
 
 #include "Element.hpp"
+#include <list>
 
 class ElementList
 {
@@ -30,6 +31,16 @@ public:
     void addElement(std::string aName, std::string aSurname, Element::TGender aGender,
                      std::string aFatherName, std::string aFatherSurname,
                      std::string aMotherName, std::string aMotherSurname , int aBirthYear, int aBirthMonth, int aBirthDay, std::string aBirthLocation);
+
+
+    /**
+     * @brief searchDescendantsByName Searches all descendants with a specific name for the first
+     * element found that matches a specific name
+     * @param aNameAscendant Ascendant whose descendants the method will look for
+     * @param aNameDescendant Descendant name to look for in the list
+     * @return list of all descendants to that ascendant that match the specified name
+     */
+    std::list<Element*> searchDescendantsByName( std::string aNameAscendant, std::string aNameDescendant );
 
     /**
      * @brief countElements Counts the number of elements in the list
