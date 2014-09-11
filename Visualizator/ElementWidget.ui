@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>141</width>
-    <height>101</height>
+    <width>101</width>
+    <height>80</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,10 +22,10 @@
   <widget class="QLabel" name="theIcon">
    <property name="geometry">
     <rect>
-     <x>44</x>
+     <x>30</x>
      <y>9</y>
-     <width>56</width>
-     <height>56</height>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
@@ -42,10 +42,15 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>30</y>
-     <width>141</width>
+     <y>20</y>
+     <width>101</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Name</string>
@@ -59,8 +64,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>141</width>
-     <height>101</height>
+     <width>101</width>
+     <height>81</height>
     </rect>
    </property>
    <property name="text">
@@ -77,10 +82,15 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>66</y>
-     <width>141</width>
+     <y>50</y>
+     <width>101</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Birth Date</string>
