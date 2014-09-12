@@ -52,6 +52,71 @@ std::list<Element*> ElementList::searchByName( std::string aName )
     return aElementList;
 }
 
+std::list<Element*> ElementList::searchBySurname( std::string aSurname )
+{
+    std::list<Element*> aElementList = std::list<Element*>();
+    std::list<Element*>::iterator it = aElementList.begin();
+
+    Element * aCurrent = theFirst;
+
+    while( aCurrent!=NULL )
+    {
+        if ( aCurrent->getSurname().compare( aSurname )==0)
+        {
+            // add to list
+            aElementList.insert( it, aCurrent );
+            ++it;
+        }
+        aCurrent=aCurrent->getNext();
+    }
+
+    return aElementList;
+}
+
+std::list<Element*> ElementList::searchByBirthDate( int aYear, int aMonth, int aDay )
+{
+    std::list<Element*> aElementList = std::list<Element*>();
+    std::list<Element*>::iterator it = aElementList.begin();
+
+    Element * aCurrent = theFirst;
+    char buffer [11];
+    sprintf( buffer, "%04i-%02i-%02i", aYear, aMonth, aDay );
+    std::string aBirthDateString = std::string( buffer );
+
+    while( aCurrent!=NULL )
+    {
+        if ( aCurrent->getBirthDate().compare( aBirthDateString )==0)
+        {
+            // add to list
+            aElementList.insert( it, aCurrent );
+            ++it;
+        }
+        aCurrent=aCurrent->getNext();
+    }
+    return aElementList;
+}
+
+std::list<Element*> ElementList::searchByLocation( std::string aLocation )
+{
+    std::list<Element*> aElementList = std::list<Element*>();
+    std::list<Element*>::iterator it = aElementList.begin();
+
+    Element * aCurrent = theFirst;
+
+    while( aCurrent!=NULL )
+    {
+        if ( aCurrent->getBirthLocation().compare( aLocation )==0)
+        {
+            // add to list
+            aElementList.insert( it, aCurrent );
+            ++it;
+        }
+        aCurrent=aCurrent->getNext();
+    }
+
+    return aElementList;
+}
+
 std::list<Element*> ElementList::searchDescendantsByName( std::string aNameAscendant, std::string aNameDescendant )
 {
     std::list<Element*> aElementList = std::list<Element*>();
