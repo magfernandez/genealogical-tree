@@ -3,6 +3,7 @@
 
 #include "Element.hpp"
 #include <list>
+#include <unordered_map>
 
 class ElementList
 {
@@ -12,12 +13,6 @@ public:
      * @brief ElementList Creates an empty list
      */
     ElementList();
-
-    /**
-     * @brief ElementList Creates a list starting with the specified element
-     * @param aStartElement Starting element of the list
-     */
-    ElementList( Element * aStartElement );
 
     /**
      * @brief addElement Creates a new element and adds it to the list
@@ -102,8 +97,13 @@ public:
     void deleteAllElements();
 
 private:
-    Element * theFirst;
-    Element * theLast;
+
+    std::unordered_multimap<std::string, Element*> theNameMap;
+    std::unordered_multimap<std::string, Element*> theSurnameMap;
+    std::unordered_multimap<std::string, Element*> theCompleteNameMap;
+    std::unordered_multimap<std::string, Element*> theBirthDateMap;
+    std::unordered_multimap<std::string, Element*> theBirthLocationMap;
+
 };
 
 #endif // __ELEMENTLIST_HPP

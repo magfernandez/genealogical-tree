@@ -1,23 +1,19 @@
 #include "Element.hpp"
 
-Element::Element(std::string aName, std::string aSurname, TGender aGender, std::string aFatherName, std::string aFatherSurname,
-                 std::string aMotherName , std::string aMotherSurname, int aBirthYear, int aBirthMonth, int aBirthDay , std::string aBirthLocation)
+Element::Element(std::string aName, std::string aSurname, TGender aGender, std::string aFatherName,
+                 std::string aFatherSurname, std::string aMotherName , std::string aMotherSurname,
+                 int aBirthYear, int aBirthMonth, int aBirthDay , std::string aBirthLocation)
+                 : theName( aName ), theSurname( aSurname ), theFatherName( aFatherName ),
+                 theFatherSurname( aFatherSurname ), theMotherName( aMotherName ),
+                 theMotherSurname( aMotherSurname ), theGender( aGender ), theBirthLocation( aBirthLocation )
 {
-    theName = aName;
-    theSurname = aSurname;
-    theFatherName = aFatherName;
-    theFatherSurname = aFatherSurname;
-    theMotherName = aMotherName;
-    theMotherSurname = aMotherSurname;
     theNext = NULL;
     thePrevious = NULL;
     theFather = NULL;
     theMother = NULL;
-    theGender = aGender;
     theBirthDate.year = aBirthYear;
     theBirthDate.month = aBirthMonth;
     theBirthDate.day = aBirthDay;
-    theBirthLocation = aBirthLocation;
 }
 
 void Element::assignRelationship( Element *aMember )

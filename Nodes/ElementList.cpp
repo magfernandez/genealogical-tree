@@ -2,59 +2,46 @@
 
 ElementList::ElementList( )
 {
-    theFirst = NULL;
-    theLast = NULL;
+    theNameMap          = std::unordered_multimap<std::string, Element*>();
+    theSurnameMap       = std::unordered_multimap<std::string, Element*>();
+    theCompleteNameMap  = std::unordered_multimap<std::string, Element*>();
+    theBirthDateMap     = std::unordered_multimap<std::string, Element*>();
+    theBirthLocationMap = std::unordered_multimap<std::string, Element*>();
 }
 
-ElementList::ElementList( Element *aStartElement )
+void ElementList::addElement( std::string aName, std::string aSurname, Element::TGender aGender,
+                              std::string aFatherName, std::string aFatherSurname,
+                              std::string aMotherName, std::string aMotherSurname, int aBirthYear,
+                              int aBirthMonth, int aBirthDay, std::string aBirthLocation )
 {
-    if ( aStartElement!=NULL )
-    {
-        // set first element
-        theFirst = aStartElement;
+    Element * aNewElement = new Element( aName, aSurname, aGender, aFatherName, aFatherSurname,
+                                         aMotherName, aMotherSurname, aBirthYear, aBirthMonth, aBirthDay, aBirthLocation );
 
-        // Iterate over the list from the start until
-        // finding the last element
-        Element * aCurrentElement = aStartElement;
-        while( aCurrentElement != NULL)
-        {
-            theLast = aCurrentElement;
-            aCurrentElement = aCurrentElement->getNext();
-        }
-    }
-    else
-    {
-        // null list
-        theFirst = NULL;
-        theLast = NULL;
-    }
-
+    theNameMap.insert( std::unordered_multimap<std::string, Element*>::value_type( aName, aNewElement ));
+    theSurnameMap.insert( std::unordered_multimap<std::string, Element*>::value_type( aSurname, aNewElement ));
+    theCompleteNameMap.insert( std::unordered_multimap<std::string, Element*>::value_type( aNewElement->getCompleteName(), aNewElement ));
+    theBirthDateMap.insert( std::unordered_multimap<std::string, Element*>::value_type( aNewElement->getBirthDate(), aNewElement ));
+    theBirthLocationMap.insert( std::unordered_multimap<std::string, Element*>::value_type( aNewElement->getBirthDate(), aNewElement ));
 }
 
 std::list<Element*> ElementList::searchByName( std::string aName )
 {
-    std::list<Element*> aElementList = std::list<Element*>();
-    std::list<Element*>::iterator it = aElementList.begin();
+    /*std::list<Element*> aElementList = std::list<Element*>();
+    std::list<Element*>::iterator itPos = aElementList.begin();
 
-    Element * aCurrent = theFirst;
-
-    while( aCurrent!=NULL )
+    auto itStr = theCompleteNameMap.equal_range( aName );
+    for ( auto it = itStr.first; it != itStr.second; ++it)
     {
-        if ( aCurrent->getName().compare( aName )==0)
-        {
-            // add to list
-            aElementList.insert( it, aCurrent );
-            ++it;
-        }
-        aCurrent=aCurrent->getNext();
+        aElementList.insert( itPos, it->second );
+        ++itPos;
     }
 
-    return aElementList;
+    return aElementList;*/
 }
 
 std::list<Element*> ElementList::searchBySurname( std::string aSurname )
 {
-    std::list<Element*> aElementList = std::list<Element*>();
+    /*std::list<Element*> aElementList = std::list<Element*>();
     std::list<Element*>::iterator it = aElementList.begin();
 
     Element * aCurrent = theFirst;
@@ -70,12 +57,12 @@ std::list<Element*> ElementList::searchBySurname( std::string aSurname )
         aCurrent=aCurrent->getNext();
     }
 
-    return aElementList;
+    return aElementList;*/
 }
 
 std::list<Element*> ElementList::searchByBirthDate( int aYear, int aMonth, int aDay )
 {
-    std::list<Element*> aElementList = std::list<Element*>();
+    /*std::list<Element*> aElementList = std::list<Element*>();
     std::list<Element*>::iterator it = aElementList.begin();
 
     Element * aCurrent = theFirst;
@@ -93,12 +80,12 @@ std::list<Element*> ElementList::searchByBirthDate( int aYear, int aMonth, int a
         }
         aCurrent=aCurrent->getNext();
     }
-    return aElementList;
+    return aElementList;*/
 }
 
 std::list<Element*> ElementList::searchByLocation( std::string aLocation )
 {
-    std::list<Element*> aElementList = std::list<Element*>();
+    /*std::list<Element*> aElementList = std::list<Element*>();
     std::list<Element*>::iterator it = aElementList.begin();
 
     Element * aCurrent = theFirst;
@@ -114,12 +101,12 @@ std::list<Element*> ElementList::searchByLocation( std::string aLocation )
         aCurrent=aCurrent->getNext();
     }
 
-    return aElementList;
+    return aElementList;*/
 }
 
 std::list<Element*> ElementList::searchDescendantsByName( std::string aNameAscendant, std::string aNameDescendant )
 {
-    std::list<Element*> aElementList = std::list<Element*>();
+    /*std::list<Element*> aElementList = std::list<Element*>();
     std::list<Element*>::iterator it = aElementList.begin();
 
     Element * aCurrent = theFirst;
@@ -158,48 +145,20 @@ std::list<Element*> ElementList::searchDescendantsByName( std::string aNameAscen
         }
     }
 
-    return aElementList;
+    return aElementList;*/
 }
 
 
-void ElementList::addElement( std::string aName, std::string aSurname, Element::TGender aGender,
-                              std::string aFatherName, std::string aFatherSurname,
-                              std::string aMotherName, std::string aMotherSurname, int aBirthYear,
-                              int aBirthMonth, int aBirthDay, std::string aBirthLocation )
-{
-    Element * aNewElement = new Element( aName, aSurname, aGender, aFatherName, aFatherSurname,
-                                         aMotherName, aMotherSurname, aBirthYear, aBirthMonth, aBirthDay, aBirthLocation );
-    if ( theFirst==NULL)
-    {
-        theFirst = aNewElement;
-    }
-    aNewElement->setPrevious( theLast );
-    if ( theLast!=NULL )
-    {
-        theLast->setNext( aNewElement );
-    }
-    aNewElement->setNext( NULL );
-    theLast = aNewElement;
-}
+
 
 int ElementList::countElements()
 {
-    int aElementNumber = 0;
-
-    Element * aCurrent = theFirst;
-
-    while( aCurrent!=NULL )
-    {
-        aCurrent = aCurrent->getNext();
-        aElementNumber++;
-    }
-
-    return aElementNumber;
+    return theCompleteNameMap.size();
 }
 
 int ElementList::assignRelationships()
 {
-    int aRelationshipsNr = 0;
+    /*int aRelationshipsNr = 0;
     Element * aCurrent = theFirst;
 
     while ( aCurrent!=NULL )
@@ -222,17 +181,17 @@ int ElementList::assignRelationships()
 
     std::cout << "\nRelationship: " << aRelationshipsNr << " relations found in list\n";
 
-    return aRelationshipsNr;
+    return aRelationshipsNr;*/
 }
 
 Element * ElementList::getFirstElement()
 {
-    return this->theFirst;
+    /*return this->theFirst;*/
 }
 
 void ElementList::deleteAllElements()
 {
-    Element * aCurrent = this->theFirst;
+    /*Element * aCurrent = this->theFirst;
     Element * aCurrentToDelete = this->theFirst;
 
     while ( aCurrent!=NULL )
@@ -243,5 +202,5 @@ void ElementList::deleteAllElements()
     }
 
     theFirst = NULL;
-    theLast = NULL;
+    theLast = NULL;*/
 }
