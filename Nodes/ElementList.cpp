@@ -2,9 +2,9 @@
 
 ElementList::ElementList( )
 {
+    theCompleteNameMap  = std::map<std::string, Element*>();
     theNameMap          = std::unordered_multimap<std::string, Element*>();
     theSurnameMap       = std::unordered_multimap<std::string, Element*>();
-    theCompleteNameMap  = std::unordered_multimap<std::string, Element*>();
     theBirthDateMap     = std::unordered_multimap<std::string, Element*>();
     theBirthLocationMap = std::unordered_multimap<std::string, Element*>();
 }
@@ -19,133 +19,105 @@ void ElementList::addElement( std::string aName, std::string aSurname, Element::
 
     theNameMap.insert( std::unordered_multimap<std::string, Element*>::value_type( aName, aNewElement ));
     theSurnameMap.insert( std::unordered_multimap<std::string, Element*>::value_type( aSurname, aNewElement ));
-    theCompleteNameMap.insert( std::unordered_multimap<std::string, Element*>::value_type( aNewElement->getCompleteName(), aNewElement ));
+    theCompleteNameMap[ aNewElement->getCompleteName() ] = aNewElement;
     theBirthDateMap.insert( std::unordered_multimap<std::string, Element*>::value_type( aNewElement->getBirthDate(), aNewElement ));
     theBirthLocationMap.insert( std::unordered_multimap<std::string, Element*>::value_type( aNewElement->getBirthDate(), aNewElement ));
 }
 
 std::list<Element*> ElementList::searchByName( std::string aName )
 {
-    /*std::list<Element*> aElementList = std::list<Element*>();
+    std::list<Element*> aElementList = std::list<Element*>();
     std::list<Element*>::iterator itPos = aElementList.begin();
 
-    auto itStr = theCompleteNameMap.equal_range( aName );
+    auto itStr = theNameMap.equal_range( aName );
     for ( auto it = itStr.first; it != itStr.second; ++it)
     {
         aElementList.insert( itPos, it->second );
         ++itPos;
     }
 
-    return aElementList;*/
+    return aElementList;
 }
 
 std::list<Element*> ElementList::searchBySurname( std::string aSurname )
 {
-    /*std::list<Element*> aElementList = std::list<Element*>();
-    std::list<Element*>::iterator it = aElementList.begin();
+    std::list<Element*> aElementList = std::list<Element*>();
+    std::list<Element*>::iterator itPos = aElementList.begin();
 
-    Element * aCurrent = theFirst;
-
-    while( aCurrent!=NULL )
+    auto itStr = theSurnameMap.equal_range( aSurname );
+    for ( auto it = itStr.first; it != itStr.second; ++it)
     {
-        if ( aCurrent->getSurname().compare( aSurname )==0)
-        {
-            // add to list
-            aElementList.insert( it, aCurrent );
-            ++it;
-        }
-        aCurrent=aCurrent->getNext();
+        aElementList.insert( itPos, it->second );
+        ++itPos;
     }
 
-    return aElementList;*/
+    return aElementList;
 }
 
 std::list<Element*> ElementList::searchByBirthDate( int aYear, int aMonth, int aDay )
 {
-    /*std::list<Element*> aElementList = std::list<Element*>();
-    std::list<Element*>::iterator it = aElementList.begin();
-
-    Element * aCurrent = theFirst;
     char buffer [11];
     sprintf( buffer, "%04i-%02i-%02i", aYear, aMonth, aDay );
     std::string aBirthDateString = std::string( buffer );
 
-    while( aCurrent!=NULL )
+    std::list<Element*> aElementList = std::list<Element*>();
+    std::list<Element*>::iterator itPos = aElementList.begin();
+
+    auto itStr = theBirthDateMap.equal_range( aBirthDateString );
+    for ( auto it = itStr.first; it != itStr.second; ++it)
     {
-        if ( aCurrent->getBirthDate().compare( aBirthDateString )==0)
-        {
-            // add to list
-            aElementList.insert( it, aCurrent );
-            ++it;
-        }
-        aCurrent=aCurrent->getNext();
+        aElementList.insert( itPos, it->second );
+        ++itPos;
     }
-    return aElementList;*/
+
+    return aElementList;
 }
 
 std::list<Element*> ElementList::searchByLocation( std::string aLocation )
 {
-    /*std::list<Element*> aElementList = std::list<Element*>();
-    std::list<Element*>::iterator it = aElementList.begin();
+    std::list<Element*> aElementList = std::list<Element*>();
+    std::list<Element*>::iterator itPos = aElementList.begin();
 
-    Element * aCurrent = theFirst;
-
-    while( aCurrent!=NULL )
+    auto itStr = theBirthLocationMap.equal_range( aLocation );
+    for ( auto it = itStr.first; it != itStr.second; ++it)
     {
-        if ( aCurrent->getBirthLocation().compare( aLocation )==0)
-        {
-            // add to list
-            aElementList.insert( it, aCurrent );
-            ++it;
-        }
-        aCurrent=aCurrent->getNext();
+        aElementList.insert( itPos, it->second );
+        ++itPos;
     }
 
-    return aElementList;*/
+    return aElementList;
 }
 
 std::list<Element*> ElementList::searchDescendantsByName( std::string aNameAscendant, std::string aNameDescendant )
 {
-    /*std::list<Element*> aElementList = std::list<Element*>();
-    std::list<Element*>::iterator it = aElementList.begin();
+    std::list<Element*> aElementList = std::list<Element*>();
+    std::list<Element*>::iterator itPos = aElementList.begin();
 
-    Element * aCurrent = theFirst;
-    Element * aFirstToLook = NULL;
-
-    while( aCurrent!=NULL )
+    auto itStr = theNameMap.equal_range( aNameDescendant );
+    for ( auto it = itStr.first; it != itStr.second; ++it)
     {
-        if ( aCurrent->getName().compare( aNameAscendant )==0 )
+        if ( elementHasAncestorWithName( it->second, aNameAscendant ) )
         {
-            aFirstToLook = aCurrent;
-            aCurrent = NULL;
+            // This element has an ancestor with matching name
+            // Add it to the list
+            aElementList.insert( itPos, it->second );
+            ++itPos;
+        }
+        /*std::string aFatherCompleteName = it->second->getFatherCompleteName();
+
+        if ( theCompleteNameMap.at( aFatherCompleteName )->getName().compare( aNameAscendant )==0 )
+        {
+            aElementList.insert( itPos, it->second );
+            ++itPos;
         }
         else
         {
-            aCurrent = aCurrent->getNext();
-        }
+            // Continue looking
+        }*/
+
     }
 
-    if ( aFirstToLook==NULL )
-    {
-        return std::list<Element*>();
-    }
-    else
-    {
-        aCurrent = aFirstToLook;
-
-        while( aCurrent!=NULL )
-        {
-            if ( aCurrent->getName().compare( aNameDescendant )==0)
-            {
-                // add to list
-                aElementList.insert( it, aCurrent );
-                ++it;
-            }
-            aCurrent=aCurrent->getNext();
-        }
-    }
-
-    return aElementList;*/
+    return aElementList;
 }
 
 
@@ -154,39 +126,6 @@ std::list<Element*> ElementList::searchDescendantsByName( std::string aNameAscen
 int ElementList::countElements()
 {
     return theCompleteNameMap.size();
-}
-
-int ElementList::assignRelationships()
-{
-    /*int aRelationshipsNr = 0;
-    Element * aCurrent = theFirst;
-
-    while ( aCurrent!=NULL )
-    {
-        aCurrent->assignRelationship( theFirst );
-        std::cout << "=======================\n"
-                  << "NAME: " << aCurrent->getCompleteName() << "\n";
-        if ( aCurrent->getFather()!=NULL )
-        {
-            std::cout << "FATHER: " << aCurrent->getFather()->getCompleteName() << "\n";
-            aRelationshipsNr++;
-        }
-        if ( aCurrent->getMother()!=NULL )
-        {
-            std::cout << "MOTHER: " << aCurrent->getMother()->getCompleteName() << "\n";
-            aRelationshipsNr++;
-        }
-        aCurrent = aCurrent->getNext();
-    }
-
-    std::cout << "\nRelationship: " << aRelationshipsNr << " relations found in list\n";
-
-    return aRelationshipsNr;*/
-}
-
-Element * ElementList::getFirstElement()
-{
-    /*return this->theFirst;*/
 }
 
 void ElementList::deleteAllElements()
@@ -203,4 +142,35 @@ void ElementList::deleteAllElements()
 
     theFirst = NULL;
     theLast = NULL;*/
+}
+
+
+bool ElementList::elementHasAncestorWithName( Element * aElement, std::string anAncestorName )
+{
+    std::string aFatherCompleteName = aElement->getFatherCompleteName();
+    std::map<std::string, Element*>::iterator itToFather = theCompleteNameMap.find( aFatherCompleteName );
+
+    // TODO Include mother also?
+    if ( itToFather!=theCompleteNameMap.end() )
+    {
+        // father element exist
+        // Check if it meets the specified ancestor name
+        if ( itToFather->second->getName().compare( anAncestorName )==0 )
+        {
+            // father element meets the specified name
+            return true;
+        }
+        else
+        {
+            // else return the result of recursively looking for it
+            return ( elementHasAncestorWithName( itToFather->second, anAncestorName ));
+        }
+
+    }
+    else
+    {
+        // father element does not even exist, so the tree is cut here
+        // End the search process
+        return false;
+    }
 }

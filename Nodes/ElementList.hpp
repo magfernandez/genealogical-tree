@@ -79,31 +79,27 @@ public:
     int countElements();
 
     /**
-     * @brief assignRelationships Searches for relationships between elements
-     * in the list and updates them
-     * @return Number of relationships between elements found
-     */
-    int assignRelationships();
-
-    /**
-     * @brief getFirstElement Returns the first element on this list
-     * @return First element of the list
-     */
-    Element * getFirstElement();
-
-    /**
      * @brief deleteAllElements Deletes all contained instances
      */
     void deleteAllElements();
 
 private:
 
+    /**
+     * @brief elementHasAncestorWithName Checks if an element has at least one ancestor
+     * with the specified name
+     * @param aElement Element whose ancestors will be evaluated
+     * @param anAncestorName Name to look for
+     * @return boolean containing if the relationship does exist
+     */
+    bool elementHasAncestorWithName( Element * aElement, std::string anAncestorName );
+
+    // Restricted to unique name-surname combination.
+    std::map<std::string, Element*> theCompleteNameMap;
     std::unordered_multimap<std::string, Element*> theNameMap;
     std::unordered_multimap<std::string, Element*> theSurnameMap;
-    std::unordered_multimap<std::string, Element*> theCompleteNameMap;
     std::unordered_multimap<std::string, Element*> theBirthDateMap;
     std::unordered_multimap<std::string, Element*> theBirthLocationMap;
-
 };
 
 #endif // __ELEMENTLIST_HPP
