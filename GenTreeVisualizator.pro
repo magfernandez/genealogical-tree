@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
-CONFIG   += console
+CONFIG   += console c++11
 unix: LIBS += -lcppunit
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
