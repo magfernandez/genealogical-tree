@@ -103,25 +103,10 @@ std::list<Element*> ElementList::searchDescendantsByName( std::string aNameAscen
             aElementList.insert( itPos, it->second );
             ++itPos;
         }
-        /*std::string aFatherCompleteName = it->second->getFatherCompleteName();
-
-        if ( theCompleteNameMap.at( aFatherCompleteName )->getName().compare( aNameAscendant )==0 )
-        {
-            aElementList.insert( itPos, it->second );
-            ++itPos;
-        }
-        else
-        {
-            // Continue looking
-        }*/
-
     }
 
     return aElementList;
 }
-
-
-
 
 int ElementList::countElements()
 {
@@ -143,7 +128,6 @@ void ElementList::deleteAllElements()
     theBirthDateMap.clear();
     theBirthLocationMap.clear();
 }
-
 
 bool ElementList::elementHasAncestorWithName( Element * aElement, std::string anAncestorName )
 {
@@ -167,7 +151,6 @@ bool ElementList::elementHasAncestorWithName( Element * aElement, std::string an
             // else return the result of recursively looking for it
             return ( elementHasAncestorWithName( itToFather->second, anAncestorName ));
         }
-
     }
     else if ( itToMother!=theCompleteNameMap.end() )
     {
@@ -183,7 +166,6 @@ bool ElementList::elementHasAncestorWithName( Element * aElement, std::string an
             // else return the result of recursively looking for it
             return ( elementHasAncestorWithName( itToMother->second, anAncestorName ));
         }
-
     }
     else
     {
