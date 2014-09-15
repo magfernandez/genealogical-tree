@@ -8,12 +8,9 @@
 class TestElement : public CppUnit::TestFixture  {
 
     CPPUNIT_TEST_SUITE( TestElement );
-    CPPUNIT_TEST( testAssignRelationship );
     CPPUNIT_TEST( testFatherNameAll );
     CPPUNIT_TEST( testMotherNameAll );
     CPPUNIT_TEST( testGetCompleteName );
-    CPPUNIT_TEST( testNextAll );
-    CPPUNIT_TEST( testPreviousAll );
     CPPUNIT_TEST( testGender );
     CPPUNIT_TEST( testBirthdate );
     CPPUNIT_TEST( testBirthLocation );
@@ -64,13 +61,6 @@ public:
 
       aMotherTestElement = new Element( aMotherName, aMotherSurname, Element::FEMALE,
                                             "N/A", "N/A", "N/A", "N/A", 1956, 7, 12, aBirthLocation_3 );
-
-      // Form a list starting on Father element
-      aFatherTestElement->setNext( aMotherTestElement );
-      aMotherTestElement->setNext( aTestElement );
-      aTestElement->setPrevious( aMotherTestElement );
-      aMotherTestElement->setPrevious( aFatherTestElement );
-
   }
 
   void tearDown()
@@ -78,15 +68,6 @@ public:
     delete aTestElement;
     delete aFatherTestElement;
     delete aMotherTestElement;
-  }
-
-  void testAssignRelationship()
-  {
-      // Also tests getters for mother/father
-      Element * aCurrent = aFatherTestElement;
-      aTestElement->assignRelationship( aCurrent );
-      CPPUNIT_ASSERT( aTestElement->getFather()==aFatherTestElement );
-      CPPUNIT_ASSERT( aTestElement->getMother()==aMotherTestElement );
   }
 
   void testFatherNameAll()
@@ -110,26 +91,6 @@ public:
     std::string myName = aName + " " + aSurname;
     std::string myGotName = aTestElement->getCompleteName();
     CPPUNIT_ASSERT( myName.compare( myGotName )==0);
-  }
-
-  void testNextAll()
-  {
-      // Insert a new element at the end of the list
-      Element * aNewElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F", 1995, 1, 1, aBirthLocation_1 );
-      aTestElement->setNext( aNewElement );
-      CPPUNIT_ASSERT( aTestElement->getNext()==aNewElement );
-      aTestElement->setNext( NULL );
-      delete aNewElement;
-  }
-
-  void testPreviousAll()
-  {
-      // Insert a new element at the start of the list
-      Element * aNewElement = new Element( "A" , "B", Element::MALE, "C", "D", "E", "F", 1995, 1, 1, aBirthLocation_1 );
-      aFatherTestElement->setPrevious( aNewElement );
-      CPPUNIT_ASSERT( aFatherTestElement->getPrevious()==aNewElement );
-      aFatherTestElement->setPrevious( NULL );
-      delete aNewElement;
   }
 
   void testGender()
