@@ -17,10 +17,10 @@ using namespace CppUnit;
 
 int main(int argc, char *argv[])
 {
-    //CppUnit::TextUi::TestRunner runner;
-    //runner.addTest( TestElement::suite() );
-    //runner.addTest( TestElementList::suite() );
-    //runner.run();
+    CppUnit::TextUi::TestRunner runner;
+    runner.addTest( TestElement::suite() );
+    runner.addTest( TestElementList::suite() );
+    runner.run();
 
     ElementList aList;
 
@@ -33,11 +33,7 @@ int main(int argc, char *argv[])
     aList.addElement( "Ernie", "Gates", Element::MALE, "Bill", "Gates", "Anna", "Doe", 1987, 12, 12, "Valdepeñas" );
     aList.addElement( "Ernie", "Roberts", Element::MALE, "Kenny", "Roberts", "Louise", "Gates", 2011, 8, 3, "Murcia" );
 
-    /*aList.assignRelationships();
-    aList.countElements();
-
     std::list<Element*> aResultList = aList.searchDescendantsByName( "Jimmy", "Ernie");
-
 
     for ( std::list<Element*>::iterator it = aResultList.begin(); it!=aResultList.end(); ++it )
     {
@@ -45,7 +41,7 @@ int main(int argc, char *argv[])
     }
 
 
-    QApplication a(argc, argv);
+    /*QApplication a(argc, argv);
 
 
     Visualizator w( &aList );
