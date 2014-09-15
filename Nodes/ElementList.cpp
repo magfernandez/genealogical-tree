@@ -21,7 +21,7 @@ void ElementList::addElement( std::string aName, std::string aSurname, Element::
     theSurnameMap.insert( std::unordered_multimap<std::string, Element*>::value_type( aSurname, aNewElement ));
     theCompleteNameMap[ aNewElement->getCompleteName() ] = aNewElement;
     theBirthDateMap.insert( std::unordered_multimap<std::string, Element*>::value_type( aNewElement->getBirthDate(), aNewElement ));
-    theBirthLocationMap.insert( std::unordered_multimap<std::string, Element*>::value_type( aNewElement->getBirthDate(), aNewElement ));
+    theBirthLocationMap.insert( std::unordered_multimap<std::string, Element*>::value_type( aNewElement->getBirthLocation(), aNewElement ));
 }
 
 std::list<Element*> ElementList::searchByName( std::string aName )
@@ -130,25 +130,27 @@ int ElementList::countElements()
 
 void ElementList::deleteAllElements()
 {
-    /*Element * aCurrent = this->theFirst;
-    Element * aCurrentToDelete = this->theFirst;
-
-    while ( aCurrent!=NULL )
+    for ( std::map<std::string,Element*>::iterator it=theCompleteNameMap.begin();
+          it != theCompleteNameMap.end(); ++it )
     {
-        aCurrentToDelete = aCurrent;
-        aCurrent = aCurrent->getNext();
-        delete aCurrentToDelete;
+        delete( it->second );
     }
-
-    theFirst = NULL;
-    theLast = NULL;*/
+    theCompleteNameMap.clear();
+    // All elements pointed inside the rest of the maps are contained -and already
+    // deleted- in theCompleteNameMap
+    theNameMap.clear();
+    theSurnameMap.clear();
+    theBirthDateMap.clear();
+    theBirthLocationMap.clear();
 }
 
 
 bool ElementList::elementHasAncestorWithName( Element * aElement, std::string anAncestorName )
 {
     std::string aFatherCompleteName = aElement->getFatherCompleteName();
+    std::string aMotherCompleteName = aElement->getMotherCompleteName();
     std::map<std::string, Element*>::iterator itToFather = theCompleteNameMap.find( aFatherCompleteName );
+    std::map<std::string, Element*>::iterator itToMother = theCompleteNameMap.find( aMotherCompleteName );
 
     // TODO Include mother also?
     if ( itToFather!=theCompleteNameMap.end() )
@@ -164,6 +166,22 @@ bool ElementList::elementHasAncestorWithName( Element * aElement, std::string an
         {
             // else return the result of recursively looking for it
             return ( elementHasAncestorWithName( itToFather->second, anAncestorName ));
+        }
+
+    }
+    else if ( itToMother!=theCompleteNameMap.end() )
+    {
+        // mother element exist
+        // Check if it meets the specified ancestor name
+        if ( itToMother->second->getName().compare( anAncestorName )==0 )
+        {
+            // mother element meets the specified name
+            return true;
+        }
+        else
+        {
+            // else return the result of recursively looking for it
+            return ( elementHasAncestorWithName( itToMother->second, anAncestorName ));
         }
 
     }
