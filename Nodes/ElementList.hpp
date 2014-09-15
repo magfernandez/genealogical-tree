@@ -83,6 +83,26 @@ public:
      */
     void deleteAllElements();
 
+    /**
+     * @brief getFatherElement Returns a pointer to the father element of a given one
+     * @param aElement Pointer to element whose father element to look for
+     * @return Pointer to father element if exists, else otherwise
+     */
+    Element* getFatherElement( Element* aElement );
+
+    /**
+     * @brief getMotherElement Returns a pointer to the mother element of a given one
+     * @param aElement Pointer to element whose mother element to look for
+     * @return Pointer to mother element if exists, else otherwise
+     */
+    Element* getMotherElement( Element* aElement );
+
+    /**
+     * @brief getList Returns a list containing all the indexed elements
+     * @return List of all elements
+     */
+    std::list<Element*> getList();
+
 private:
 
     /**

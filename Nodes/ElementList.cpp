@@ -174,3 +174,46 @@ bool ElementList::elementHasAncestorWithName( Element * aElement, std::string an
         return false;
     }
 }
+
+Element* ElementList::getFatherElement( Element* aElement )
+{
+    std::map<std::string, Element*>::iterator it = theCompleteNameMap.find( aElement->getFatherCompleteName() );
+
+    if ( it!=theCompleteNameMap.end() )
+    {
+        return it->second;
+    }
+    else
+    {
+        return NULL;
+    }
+}
+
+Element* ElementList::getMotherElement( Element* aElement )
+{
+    std::map<std::string, Element*>::iterator it = theCompleteNameMap.find( aElement->getMotherCompleteName() );
+
+    if ( it!=theCompleteNameMap.end() )
+    {
+        return it->second;
+    }
+    else
+    {
+        return NULL;
+    }
+}
+
+std::list<Element*> ElementList::getList()
+{
+    std::list<Element*> aList = std::list<Element*>();
+    std::list<Element*>::iterator aListIterator = aList.begin();
+
+    for ( std::map<std::string, Element*>::iterator it = theCompleteNameMap.begin();
+          it != theCompleteNameMap.end(); ++it )
+    {
+        aList.insert( aListIterator, it->second );
+        ++aListIterator;
+    }
+
+    return aList;
+}
