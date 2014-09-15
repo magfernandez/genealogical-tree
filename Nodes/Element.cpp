@@ -7,38 +7,9 @@ Element::Element(std::string aName, std::string aSurname, TGender aGender, std::
                  theFatherSurname( aFatherSurname ), theMotherName( aMotherName ),
                  theMotherSurname( aMotherSurname ), theGender( aGender ), theBirthLocation( aBirthLocation )
 {
-    theNext = NULL;
-    thePrevious = NULL;
-    theFather = NULL;
-    theMother = NULL;
     theBirthDate.year = aBirthYear;
     theBirthDate.month = aBirthMonth;
     theBirthDate.day = aBirthDay;
-}
-
-void Element::assignRelationship( Element *aMember )
-{
-    Element * aCurrentElement = aMember;
-
-    // Relationship between names to compare and pointers to
-    // an assignable element for that role
-    std::map<std::string, Element *> theFamilyMap;
-    theFamilyMap[ this->getFatherCompleteName() ] = this->theFather;
-    theFamilyMap[ this->getMotherCompleteName() ] = this->theMother;
-
-    while ( aCurrentElement != NULL )
-    {
-        if (aCurrentElement->getCompleteName().compare( this->getFatherCompleteName())==0)
-        {
-            this->theFather = aCurrentElement;
-        }
-        if (aCurrentElement->getCompleteName().compare( this->getMotherCompleteName())==0)
-        {
-            this->theMother = aCurrentElement;
-        }
-
-        aCurrentElement = aCurrentElement->getNext();
-    }
 }
 
 void Element::setFatherCredentials( std::string aName, std::string aSurname )
@@ -76,36 +47,6 @@ std::string Element::getFatherCompleteName()
 std::string Element::getMotherCompleteName()
 {
     return ( this->theMotherName + std::string(" ") + this->theMotherSurname );
-}
-
-Element * Element::getNext()
-{
-    return this->theNext;
-}
-
-void Element::setNext( Element * aElement )
-{
-    this->theNext = aElement;
-}
-
-Element * Element::getPrevious()
-{
-    return this->thePrevious;
-}
-
-void Element::setPrevious( Element * aElement )
-{
-    this->thePrevious = aElement;
-}
-
-Element * Element::getFather()
-{
-    return this->theFather;
-}
-
-Element * Element::getMother()
-{
-    return this->theMother;
 }
 
 Element::TGender Element::getGender()
