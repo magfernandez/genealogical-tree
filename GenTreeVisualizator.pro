@@ -24,7 +24,8 @@ HEADERS  += Visualizator/Visualizator.hpp \
     Nodes/ElementList.hpp \
     Tests/Nodes/TestElement.hpp \
     Tests/Nodes/TestElementList.hpp \
-    Visualizator/ElementWidget.hpp
+    Visualizator/ElementWidget.hpp \
+    Utils/NameGenerator.hpp
 
 FORMS    += Visualizator/Visualizator.ui \
     Visualizator/ElementWidget.ui
