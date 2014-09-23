@@ -22,8 +22,8 @@
   <widget class="QLabel" name="theIcon">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>9</y>
+     <x>31</x>
+     <y>21</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -49,7 +49,7 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>9</pointsize>
+     <pointsize>6</pointsize>
     </font>
    </property>
    <property name="text">
@@ -82,14 +82,14 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>50</y>
+     <y>36</y>
      <width>101</width>
      <height>21</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>8</pointsize>
+     <pointsize>6</pointsize>
     </font>
    </property>
    <property name="text">
@@ -99,6 +99,26 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QLabel" name="theCircle">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>18</y>
+     <width>44</width>
+     <height>44</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="Resources.qrc">:/ElementWidget/Resources/circle_grey.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>theCircle</zorder>
   <zorder>theSquareLabel</zorder>
   <zorder>theIcon</zorder>
   <zorder>theName</zorder>

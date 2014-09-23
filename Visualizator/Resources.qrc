@@ -4,5 +4,6 @@
         <file>Resources/male.png</file>
         <file>Resources/square.png</file>
         <file>Resources/squareRed.png</file>
+        <file>Resources/circle_grey.png</file>
     </qresource>
 </RCC>
